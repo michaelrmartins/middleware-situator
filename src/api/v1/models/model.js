@@ -14,23 +14,20 @@ async function getPersonByIdModel(id) {
     return rows[0];
 }
 
-// Get all persons model
 async function getAllPersonsModel() {
     return executeQuery(selectAllPersonsQuery);
 }
 
-// Get active persons model
 async function getActivePersonsModel() {
 return executeQuery(selectAllActivePersonsQuery);
 }
 
-// Get inactive persons model
 async function getInactivePersonsModel() {
  return executeQuery(selectAllInactivePersonsQuery);
 }
 
 async function getPersonsByNameModel(name) {
-    return executeQuery(selectAllPersonsByNameQuery, [name]);
+    return executeQuery(selectAllPersonsByNameQuery, [`${name}%`]);
 }
 
 async function getPersonByDocumentModel(document) {
