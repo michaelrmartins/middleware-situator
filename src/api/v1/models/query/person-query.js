@@ -1,4 +1,4 @@
-// return all persons
+// return all persons Queries
 
 const basePersonQuery = `select 
     person."Id",
@@ -24,35 +24,27 @@ const basePersonQuery = `select
     left join "PersonProfile" pProfile on Person."PersonProfileId" = pProfile."Id"`;
 
 const selectAllPersonsQuery = `
-${basePersonQuery}
-order by person."Name" asc 
-limit 1000
-`;
+    ${basePersonQuery}
+    order by person."Name" asc 
+    limit 1000`;
 
 const selectAllPersonsByNameQuery = `
-${basePersonQuery}
-where person."Name" ilike $1
-order by person."Name" asc
-limit 1000
-`;
+    ${basePersonQuery}
+    where person."Name" ilike $1
+    order by person."Name" asc
+    limit 1000`;
 
 const selectAllActivePersonsQuery = `
-    select "Id", "AccountId", 
-    "Name", "Cpf", "Document", 
-    "PersonImage", "PersonType", 
-    "Active", "CreatedBy", 
-    "CreatedDate", "ModifiedDate", 
-    "LastAccessId", "Department"  
-    from "Person" p where "Active" = true;`;
+    ${basePersonQuery}
+    where person."Active" = true
+    order by person."Name" asc
+    limit 1000`;
 
 const selectAllInactivePersonsQuery = `
-    select "Id", "AccountId", 
-    "Name", "Cpf", "Document", 
-    "PersonImage", "PersonType", 
-    "Active", "CreatedBy", 
-    "CreatedDate", "ModifiedDate", 
-    "LastAccessId", "Department"  
-    from "Person" p where "Active" = false;`;
+    ${basePersonQuery}
+    where person."Active" = false
+    order by person."Name" asc
+    limit 1000`;
 
 const selectPersonDatabyIdQuery = `
     ${basePersonQuery}
