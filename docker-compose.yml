@@ -1,0 +1,31 @@
+services:
+  app:
+    build: .
+    container_name: middleware-situator-app
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - SERVER_IP_ADDRESS=0.0.0.0
+      - SERVER_PORT=3000
+    expose:
+      - "3000"
+    networks:
+      - situator-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: middleware-situator-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
+    networks:
+      - situator-network
+
+networks:
+  situator-network:
+    driver: bridge
