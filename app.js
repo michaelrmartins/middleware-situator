@@ -18,7 +18,7 @@ app.use(cors(
 
 console.log("Middleware Situator is starting...");
 
-// Swagger documentation
+// Swagger documentation - no auth required
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
     customCss: '.swagger-ui .topbar { display: none }',
     customSiteTitle: 'Middleware Situator API Docs',

@@ -25,26 +25,26 @@ const basePersonQuery = `select
 
 const selectAllPersonsQuery = `
     ${basePersonQuery}
-    order by person."Name" asc 
-    limit 1000`;
+    order by person."Name" asc
+`;
 
 const selectAllPersonsByNameQuery = `
     ${basePersonQuery}
     where person."Name" ilike $1
     order by person."Name" asc
-    limit 1000`;
+    `;
 
 const selectAllActivePersonsQuery = `
     ${basePersonQuery}
     where person."Active" = true
     order by person."Name" asc
-    limit 1000`;
+    `;
 
 const selectAllInactivePersonsQuery = `
     ${basePersonQuery}
     where person."Active" = false
     order by person."Name" asc
-    limit 1000`;
+    `;
 
 const selectPersonDatabyIdQuery = `
     ${basePersonQuery}
@@ -63,7 +63,7 @@ const selectPersonDatabyDocumentQuery = `
    
     const selectPersonDatabyCardNumberHexQuery = `
     ${basePersonQuery}
-    where aCard."CardNumberHex" = $1
+    where to_hex(aCard."CardNumber") = lower($1)
     limit 1`;
 
 module.exports = {

@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const personController = require('../controllers/person-controller');
+const cache = require('../../../middlewares/cache');
 
 /**
  * @swagger
@@ -53,7 +54,7 @@ router.get('/', (req, res) => {res.status(200).send('Person route is working!');
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get('/persons', personController.getAllPersons);
+router.get('/persons', cache, personController.getAllPersons);
 
 /**
  * @swagger
@@ -78,7 +79,7 @@ router.get('/persons', personController.getAllPersons);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get('/persons/active', personController.getActivePersons);
+router.get('/persons/active', cache, personController.getActivePersons);
 
 /**
  * @swagger
@@ -103,7 +104,7 @@ router.get('/persons/active', personController.getActivePersons);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get('/persons/inactive', personController.getInactivePersons);
+router.get('/persons/inactive', cache, personController.getInactivePersons);
 
 /**
  * @swagger
@@ -138,7 +139,7 @@ router.get('/persons/inactive', personController.getInactivePersons);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get('/id/:id', personController.getPersonById);
+router.get('/id/:id', cache, personController.getPersonById);
 
 /**
  * @swagger
@@ -173,7 +174,7 @@ router.get('/id/:id', personController.getPersonById);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get('/document/:document', personController.getPersonByDocument);
+router.get('/document/:document', cache, personController.getPersonByDocument);
 
 /**
  * @swagger
@@ -205,7 +206,7 @@ router.get('/document/:document', personController.getPersonByDocument);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get('/name/:name', personController.getPersonsByName);
+router.get('/name/:name', cache, personController.getPersonsByName);
 
 /**
  * @swagger
@@ -240,7 +241,7 @@ router.get('/name/:name', personController.getPersonsByName);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get('/card/:cardNumber', personController.getPersonByCardNumber);
+router.get('/card/:cardNumber', cache, personController.getPersonByCardNumber);
 
 /**
  * @swagger
@@ -275,6 +276,6 @@ router.get('/card/:cardNumber', personController.getPersonByCardNumber);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get('/card/hex/:cardNumberHex', personController.getPersonByCardNumberHex);
+router.get('/card/hex/:cardNumberHex', cache, personController.getPersonByCardNumberHex);
 
 module.exports = router;
